@@ -1,0 +1,462 @@
+body {
+  font-family: 'Inter', sans-serif;
+  margin: 0;
+  overflow: hidden;
+  background-color: #000;
+  color: #fff;
+}
+
+#menu {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.9);
+  z-index: 100;
+  transition: opacity 0.5s ease-in-out;
+}
+
+#img_container {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+#starry_night_bg {
+  background-image: url('https://placehold.co/1920x1080/000000/FFFFFF?text=Starry+Night+Background');
+  background-size: cover;
+  background-position: center;
+  filter: blur(8px);
+  transform: scale(1.1);
+  opacity: 0.4;
+}
+
+#content_container {
+  position: relative;
+  z-index: 101;
+  text-align: center;
+}
+
+#content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 2rem;
+  background: rgba(0, 0, 0, 0.7); /* Slightly darker for content */
+  border-radius: 15px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+  max-width: 600px;
+  margin: 0 auto; /* Center the content box */
+}
+
+.title h1 {
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: #fff;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+.title-info p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: #ccc;
+  max-width: 500px;
+  margin-bottom: 1rem;
+}
+
+#play_button, #about_button {
+  background-color: #3b82f6; /* Blue-600 */
+  color: white;
+  padding: 1rem 2.5rem;
+  border-radius: 9999px; /* Fully rounded */
+  font-size: 1.2rem;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+#play_button:hover, #about_button:hover {
+  background-color: #2563eb; /* Blue-700 */
+  transform: translateY(-2px);
+}
+
+#play_button:active, #about_button:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+#about_button_container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+
+/* About Overlay Styles */
+#about-overlay {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    max-width: 700px;
+    background-color: rgba(30, 30, 30, 0.95);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    padding: 2.5rem;
+    color: #fff;
+    z-index: 102;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+    border-radius: 12px;
+}
+
+#about-overlay.visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+#about-overlay h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    color: #fff;
+}
+
+#about-overlay p {
+    font-size: 1.05rem;
+    line-height: 1.7;
+    margin-bottom: 1rem;
+    color: #ccc;
+    text-align: center;
+}
+
+#about-overlay #close-about {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 1.8rem;
+    cursor: pointer;
+    padding: 5px 10px;
+    border-radius: 5px;
+    transition: background-color 0.2s ease;
+}
+
+#about-overlay #close-about:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Info Panel */
+#info-panel {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    background-color: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border-radius: 8px;
+    padding: 10px 15px;
+    color: #fff;
+    z-index: 50;
+    font-size: 0.9rem;
+    display: none; /* Hidden until game starts */
+}
+
+#info-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+#info-header h3 {
+    margin: 0;
+    font-size: 1.1rem;
+}
+
+#info-panel button {
+    background: none;
+    border: 1px solid #fff;
+    color: #fff;
+    padding: 3px 8px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    transition: background-color 0.2s ease;
+}
+
+#info-panel button:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+#info-content p {
+    margin: 5px 0;
+}
+
+/* Audio Controls */
+#audio_controls {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    z-index: 50;
+    display: none; /* Hidden until game starts */
+    gap: 10px;
+}
+
+#audio_controls button {
+    background-color: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    color: white;
+    padding: 10px 15px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.2s ease;
+}
+
+#audio_controls button:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+/* Painting Info Popup */
+#painting-info-popup {
+    position: absolute;
+    top: 50%;
+    right: 20px; /* Positioned to the right */
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.75);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-radius: 10px;
+    padding: 20px;
+    color: #fff;
+    z-index: 50;
+    max-width: 350px;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+}
+
+#painting-info-popup.visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+#painting-info-popup h3 {
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+}
+
+#painting-info-popup p {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+    white-space: pre-wrap; /* Preserve newlines from JS */
+}
+
+#painting-info-popup p.full-description {
+    max-height: 200px; /* Limit height for scroll */
+    overflow-y: auto;
+    scrollbar-width: thin; /* Firefox */
+    scrollbar-color: #555 #333; /* Firefox */
+}
+
+/* Custom scrollbar for Webkit browsers */
+#painting-info-popup p.full-description::-webkit-scrollbar {
+    width: 8px;
+}
+
+#painting-info-popup p.full-description::-webkit-scrollbar-track {
+    background: #333;
+    border-radius: 10px;
+}
+
+#painting-info-popup p.full-description::-webkit-scrollbar-thumb {
+    background-color: #555;
+    border-radius: 10px;
+    border: 2px solid #333;
+}
+
+
+#painting-info-popup button {
+    background-color: #3b82f6;
+    color: white;
+    padding: 8px 15px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    font-size: 0.9rem;
+    margin-top: 10px;
+    margin-right: 10px;
+    transition: background-color 0.2s ease;
+}
+
+#painting-info-popup button:hover {
+    background-color: #2563eb;
+}
+
+#painting-info-popup .key-hint {
+    font-size: 0.8rem;
+    color: #aaa;
+    margin-top: 10px;
+}
+
+/* Custom Alert Overlay */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.modal-overlay.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.modal-content {
+  background-color: rgba(30, 30, 30, 0.95);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 12px;
+  padding: 2rem;
+  color: #fff;
+  text-align: center;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+  max-width: 400px;
+  width: 90%;
+  position: relative; /* For close button positioning */
+}
+
+.modal-content p {
+  font-size: 1.1rem;
+  margin-bottom: 1.5rem;
+  line-height: 1.5;
+}
+
+.modal-button {
+  background-color: #3b82f6;
+  color: white;
+  padding: 0.8rem 2rem;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.2s ease;
+}
+
+.modal-button:hover {
+  background-color: #2563eb;
+}
+
+.modal-close-button {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 5px;
+    transition: background-color 0.2s ease;
+}
+
+.modal-close-button:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+#seller-info-content {
+    text-align: left;
+    margin-top: 1rem;
+}
+
+#seller-info-content h2 {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+    color: #fff;
+    text-align: center;
+}
+
+#seller-info-content p {
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+    color: #ccc;
+    text-align: left;
+}
+
+/* Joystick Styles */
+#joystick-container {
+  position: absolute;
+  bottom: 20px; /* Adjust as needed */
+  left: 20px; /* Adjust as needed */
+  z-index: 100;
+  display: none; /* Hidden by default, show on mobile */
+}
+
+@media (max-width: 768px) { /* Show joystick on screens smaller than 768px */
+  #joystick-container {
+    display: block;
+  }
+  #info-panel {
+      display: none !important; /* Hide info panel on mobile to save space */
+  }
+  #audio_controls {
+      bottom: 80px; /* Adjust position to not overlap with joystick */
+  }
+  #painting-info-popup {
+      width: 90%;
+      right: 5%;
+      left: 5%;
+      transform: translateY(-50%) translateX(0%);
+  }
+}
+
+#joystick-base {
+  width: 120px; /* Size of the joystick base */
+  height: 120px;
+  background-color: rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+#joystick-handle {
+  width: 60px; /* Size of the joystick handle */
+  height: 60px;
+  background-color: rgba(255, 255, 255, 0.7);
+  border-radius: 50%;
+  position: absolute;
+  cursor: grab;
+  touch-action: none; /* Prevent browser default touch actions */
+}

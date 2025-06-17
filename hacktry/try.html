@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Art Gallery</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="try.css">
+  </head>
+
+  <body>
+    <div id="menu">
+      <div id="img_container">
+        <div id="starry_night_bg"></div>
+      </div>
+      <div id="content_container">
+        <div id="content">
+          <div class="title">
+            <h1>3D Art Gallery</h1>
+          </div>
+          <div class="title-info">
+            <p>Welcome to an immersive 3D Art Gallery experience.</p>
+            <p>
+              Wander through the virtual gallery halls, and engage with a
+              variety of masterpieces, learning about their history and
+              significance.
+            </p>
+            <p>
+              Developed with a passion for bringing art to
+              life through technology.
+            </p>
+          </div>
+
+          <button id="play_button">
+            <p>EXPLORE ART</p>
+          </button>
+          <div id="about_button_container" class="mt-4">
+            <button id="about_button">ABOUT</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="about-overlay" class="rounded-lg shadow-xl">
+      <button id="close-about">X</button>
+      <h1 class="text-white text-3xl mb-6">About the 3D Art Gallery</h1>
+      <p class="text-gray-300 mb-4 max-w-2xl">
+        Welcome to our virtual 3D Art Gallery. Here, you can navigate through a
+        variety of wonderful artworks and learn about their history and
+        significance.
+      </p>
+      <p class="text-gray-300 mb-4 max-w-2xl">
+        This project aims to make art accessible to everyone,
+        regardless of location or background.
+      </p>
+      <p class="text-gray-300 mb-4 max-w-2xl">
+        Feel free to explore and engage with the artworks. The gallery is best
+        experienced in full-screen mode. For optimal navigation, use the arrow
+        keys or the W, A, S, and D keys. You can also use your mouse to change
+        the viewing direction. Additional information about the artworks will
+        appear on your screen as you approach them.
+      </p>
+    </div>
+
+    <div id="info-panel">
+      <div id="info-header">
+        <h3>Controls</h3>
+        <button id="toggle-info">Hide</button>
+      </div>
+      <div id="info-content">
+        <p><b>W/A/S/D:</b> Move around</p>
+        <p><b>Mouse:</b> Look around</p>
+        <p><b>Space:</b> Stop exploration</p>
+        <p><b>M:</b> Show Menu</p>
+        <p><b>Enter:</b> Start exploration</p>
+        <p><b>Esc:</b> Stop exploration</p>
+        <p><b>F:</b> To see more information of the painting</p>
+        <p><b>B:</b> To Request the Item</p>
+      </div>
+    </div>
+
+    <div id="audio_controls">
+      <button id="start_audio">Start Audio Guide</button>
+      <button id="stop_audio">Stop Audio Guide</button>
+    </div>
+
+    <div id="painting-info-popup">
+        <h3 id="painting-title"></h3>
+        <p id="painting-artist"></p>
+        <p id="painting-description"></p>
+        <p id="painting-price"></p>
+        <button id="more-info-button"></button>
+        <button id="request-item-button">Request Item</button>
+        <p id="f-key-hint" class="key-hint">Press 'F' for more info</p>
+    </div>
+
+    <div id="custom-alert-overlay" class="modal-overlay">
+        <div class="modal-content">
+            <p id="custom-alert-message"></p>
+            <button id="custom-alert-ok-button" class="modal-button">OK</button>
+        </div>
+    </div>
+
+    <div id="seller-info-overlay" class="modal-overlay">
+        <div class="modal-content">
+            <button id="close-seller-info" class="modal-close-button">X</button>
+            <div id="seller-info-content">
+                </div>
+        </div>
+    </div>
+
+    <div id="threejs-container" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1;"></div>
+
+    <div id="joystick-container">
+      <div id="joystick-base">
+        <div id="joystick-handle"></div>
+      </div>
+    </div>
+
+    <script type="module" src="try.js"></script>
+  </body>
+</html>
